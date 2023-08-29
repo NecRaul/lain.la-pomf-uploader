@@ -22,7 +22,7 @@ or install the package by running
 pip install lain-upload
 ```
 
-Python's native `argparse` package is used to parse return request along with set command argument.
+Python's native `os` and `argparse` packages are used to check for file size and parse return request along with set command argument respectively.
 
 ## How it works
 
