@@ -1,6 +1,6 @@
 # lain.la-pomf-uploader
 
-pomf2.lain.la uploader.
+pomf.lain.la uploader.
 
 ## Requirements
 
