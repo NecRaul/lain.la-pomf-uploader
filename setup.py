@@ -12,7 +12,7 @@ setup(
     long_description=LONG_DESCRIPTION,
     author=AUTHOR,
     packages=find_packages(),
-    install_requires=["requests", "setuptools"],
+    install_requires=["requests", "pyperclip", "setuptools"],
     keywords=["python", "uploader", "pomf", "lain", "lain.la", "pomf.lain.la"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
