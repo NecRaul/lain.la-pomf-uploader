@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = "1.0"
+VERSION = "1.1"
 DESCRIPTION = "pomf.lain.la uploader."
 LONG_DESCRIPTION = "Uploading files to pomf.lain.la using a python interface."
 AUTHOR = "NecRaul"
@@ -12,7 +12,7 @@ setup(
     long_description=LONG_DESCRIPTION,
     author=AUTHOR,
     packages=find_packages(),
-    install_requires=["requests", "pyperclip", "setuptools"],
+    install_requires=["requests", "pyperclip"],
     keywords=["python", "uploader", "pomf", "lain", "lain.la", "pomf.lain.la"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
