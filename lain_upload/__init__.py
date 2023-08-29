@@ -1,5 +1,6 @@
 from .upload import upload_file
 import argparse
+import pyperclip
 
 def main():
     
@@ -11,7 +12,8 @@ def main():
     
     if response:
         url = response['files'][0]['url']
-        print(f"File URL: {url}")
+        pyperclip.copy(url)
+        print(f"File URL: {url}\nCopied to clipboard.")
     else:
         print("Upload failed.")
     
