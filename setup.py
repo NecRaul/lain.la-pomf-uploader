@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = "1.0.0"
+VERSION = "1.0"
 DESCRIPTION = "pomf.lain.la uploader."
 LONG_DESCRIPTION = "Uploading files to pomf.lain.la using a python interface."
 AUTHOR = "NecRaul"
