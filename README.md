@@ -8,8 +8,6 @@ pomf.lain.la uploader.
 
 `pyperclip` is used to copy link to the clipboard.
 
-`setuptools` is used to build the script.
-
 If you want to build this on your own, you can install the requirements with
 
 ```Python
@@ -22,7 +20,7 @@ or install the package by running
 pip install lain-upload
 ```
 
-Python's native `os` and `argparse` packages are used to check for file size and parse return request along with set command argument respectively.
+Python's native `os` (used to check for file size), `argparse` (parse return request and set command argument) and `setuptools` (used to build the script) packages are also used.
 
 ## How it works
 
