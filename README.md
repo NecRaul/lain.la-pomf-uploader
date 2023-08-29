@@ -35,3 +35,5 @@ You can run the script with
 ```Python
 lain-upload <file-path>
 ```
+
+You can not upload files bigger than 1 gigabyte.
