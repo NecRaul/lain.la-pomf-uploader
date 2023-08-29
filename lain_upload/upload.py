@@ -9,5 +9,3 @@ def upload_file(file_path):
                 response = requests.post(API_ENDPOINT, files=files)
                 
                 return response.json()
-
-print(upload_file("pomf.png")) # test case
