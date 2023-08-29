@@ -8,4 +8,7 @@ def upload_file(file_path):
         
                 response = requests.post(API_ENDPOINT, files=files)
                 
-                return response.json()
+                if response.status_code == 200:
+                    return response.json()
+                else:
+                    return None

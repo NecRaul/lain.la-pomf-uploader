@@ -9,8 +9,11 @@ def main():
     args = parser.parse_args()
     response = upload_file(args.path)
     
-    url = response['files'][0]['url']
-    print(f"File URL: {url}")
+    if response:
+        url = response['files'][0]['url']
+        print(f"File URL: {url}")
+    else:
+        print("Upload failed.")
     
 if __name__ == "__main__":
     main()
