@@ -3,7 +3,6 @@ import argparse
 import pyperclip
 
 def main():
-    
     parser = argparse.ArgumentParser(description="Upload file to pomf.lain.la")
     parser.add_argument("path", help="File path")
     
