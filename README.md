@@ -6,7 +6,7 @@ pomf.lain.la uploader.
 
 `requests` is used to upload the file.
 
-`pyperclip` is used to copy link to the clipboard.
+`pyperclip` is used to copy the link to the clipboard.
 
 If you want to build this on your own, you can install the requirements with
 
