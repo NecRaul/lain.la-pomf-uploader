@@ -18,9 +18,9 @@ setup(
     keywords=["python", "uploader", "pomf", "lain", "lain.la", "pomf.lain.la"],
     url="https://github.com/NecRaul/lain.la-pomf-uploader",
     project_urls={
-            'Documentation': 'https://github.com/NecRaul/lain.la-pomf-uploader#readme',
-            'Source': 'https://github.com/NecRaul/lain.la-pomf-uploader',
-        },
+        "Documentation": "https://github.com/NecRaul/lain.la-pomf-uploader#readme",
+        "Source": "https://github.com/NecRaul/lain.la-pomf-uploader",
+    },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
@@ -29,7 +29,7 @@ setup(
         "Natural Language :: English",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Topic :: Internet :: WWW/HTTP"
+        "Topic :: Internet :: WWW/HTTP",
     ],
     py_modules=["upload"],
     entry_points={
