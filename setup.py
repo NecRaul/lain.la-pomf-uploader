@@ -34,7 +34,7 @@ setup(
     py_modules=["upload"],
     entry_points={
         "console_scripts": [
-            "lain-upload = lain_upload.__init__:main",
+            "lain-upload = lain_upload.main:main",
         ],
     },
 )
