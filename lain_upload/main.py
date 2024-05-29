@@ -1,4 +1,4 @@
-from .upload import parse_file
+from .upload import upload_file
 import argparse
 import pyperclip
 
@@ -8,7 +8,7 @@ def main():
     parser.add_argument("path", help="File path")
 
     args = parser.parse_args()
-    response = parse_file(args.path)
+    response = upload_file(args.path)
 
     if response:
         url = response["files"][0]["url"]
