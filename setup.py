@@ -16,7 +16,15 @@ setup(
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
     packages=find_packages(),
-    keywords=["python", "uploader", "pomf", "lain", "lain.la", "pomf.lain.la"],
+    keywords=[
+        "python",
+        "uploader",
+        "pomf",
+        "lain",
+        "lain.la",
+        "pomf.lain.la",
+        "kuroneko",
+    ],
     url="https://github.com/NecRaul/lain.la-pomf-uploader",
     project_urls={
         "Documentation": "https://github.com/NecRaul/lain.la-pomf-uploader#readme",
