@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lain_upload"
-version = "1.12"
+version = "1.13"
 description = "pomf.lain.la uploader."
 readme = "README.md"
 authors = [
