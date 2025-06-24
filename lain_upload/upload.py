@@ -21,5 +21,5 @@ def upload_file(file_path):
                     return response.json()
                 else:
                     return None
-        except:
+        except Exception:
             return None
