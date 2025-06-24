@@ -1,4 +1,4 @@
-name: publish
+name: Publish package to PyPI
 
 on:
   push:
@@ -9,24 +9,54 @@ permissions:
   contents: read
 
 jobs:
-  publish:
+  lint-and-format:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
+      - name: Install linter and formatter
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install flake8 black
+
+      - name: Run flake8
+        run: flake8 .
+
+      - name: Run black check
+        run: black --check .
+
+  publish:
+    needs: lint-and-format
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/lain-upload/
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install -r requirements.txt
           pip install build
+
       - name: Build package
         run: python -m build
-      - name: Publish package
-        uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
 
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@release/v1
