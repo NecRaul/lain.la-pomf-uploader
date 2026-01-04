@@ -1,37 +1,60 @@
 # lain.la-pomf-uploader
 
-pomf.lain.la uploader.
+`pomf.lain.la` uploader.
 
-## Requirements
+## Installation
 
-`requests` is used to upload the file.
+### Via PyPI (Recommended)
 
-`pyperclip` is used to copy the link to the clipboard.
-
-If you want to build this on your own, you can install the requirements with
-
-```Python
-pip install -r requirements.txt
-```
-
-or install the package by running
-
-```Python
+```sh
+# Basic installation
 pip install lain-upload
+
+# With clipboard support (recommended for desktop)
+pip install lain-upload[default]
 ```
 
-Python's native `os` (used to check for file size), `argparse` (parse return request and set command argument) and `setuptools` (used to build the script) packages are also used.
+### From Source (Development)
+
+```sh
+git clone git@github.com:NecRaul/lain.la-pomf-uploader.git
+cd lain-la-pomf-uploader
+pip install -e .[dev]
+```
+
+## Usage
+
+Simply provide the path to the file you wish to upload.
+
+```sh
+# Standard usage
+lain-upload kuroneko.png
+
+# Upload a file from a different directory
+lain-upload /path/to/kuroneko.png
+```
+
+## Dependencies
+
+* [requests](https://github.com/psf/requests): send the API request for uploading.
+
+### Optional
+
+* [pyperclip](https://github.com/asweigart/pyperclip) - copy the uploaded file URL to the clipboard. (optional)
 
 ## How it works
 
-Files below the file size 1GB can be uploaded to `pomf.lain.la` and `pomf2.lain.la` making necessary API calls to `https://pomf.lain.la/upload.php` endpoint.
+The `pomf.lain.la` service allows uploading files via a multipart `POST` request. This tool automates the process and adds safety checks:
 
-I just wrapped it inside said API calls inside Python and added validation to check for size. Links are printed on the terminal and copied to clipboard for ease of use.
+### The Manual Way
 
-You can run the script with
-
-```Python
-lain-upload <file-path>
+```sh
+curl -F "files[]=@my_image.png" https://pomf.lain.la/upload.php
 ```
 
-You can not upload files bigger than 1 gigabyte.
+### The lain-upload way
+
+* Validation: Checks the file size before uploading to ensure it is below the `1GiB` limit.
+* Normalization: Parses the server response to provide clean links from `pomf.lain.la` or `pomf2.lain.la`.
+* API Request: Handles the multipart `POST` request via `requests`.
+* Clipboard (Optional): If `pyperclip` is installed, the result is instantly copied to your clipboard.
