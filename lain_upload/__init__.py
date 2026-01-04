@@ -1,6 +1,12 @@
 from .upload import upload_file
 import argparse
-import pyperclip
+
+try:
+    import pyperclip
+
+    CLIP_OK = pyperclip.is_available()
+except Exception:
+    CLIP_OK = False
 
 
 def main():
@@ -12,8 +18,10 @@ def main():
 
     if response:
         url = response["files"][0]["url"]
-        pyperclip.copy(url)
-        print(f"File URL: {url}\nCopied to clipboard.")
+        print(f"File URL: {url}")
+        if CLIP_OK:
+            pyperclip.copy(url)
+            print("Copied to clipboard.")
     else:
         print("Upload failed.")
 

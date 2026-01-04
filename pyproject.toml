@@ -7,9 +7,7 @@ name = "lain_upload"
 version = "1.13"
 description = "pomf.lain.la uploader."
 readme = "README.md"
-authors = [
-    { name = "NecRaul", email = "necraul@kuroneko.dev" }
-]
+authors = [{ name = "NecRaul", email = "necraul@kuroneko.dev" }]
 license = "LGPL-2.1-only"
 license-files = ["LICENSE"]
 keywords = [
@@ -19,12 +17,9 @@ keywords = [
     "lain",
     "lain.la",
     "pomf.lain.la",
-    "kuroneko"
+    "kuroneko",
 ]
-dependencies = [
-    "pyperclip>=1.8.2",
-    "requests>=2.31.0"
-]
+dependencies = ["requests"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
@@ -34,6 +29,9 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Topic :: Internet :: WWW/HTTP",
 ]
+
+[project.optional-dependencies]
+default = ["pyperclip"]
 
 [project.urls]
 Homepage = "https://github.com/NecRaul/lain.la-pomf-uploader"
