@@ -1,5 +1,6 @@
-from .upload import upload_file
 import argparse
+
+from .upload import upload_file
 
 try:
     import pyperclip

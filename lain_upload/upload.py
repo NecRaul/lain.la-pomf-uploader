@@ -1,5 +1,6 @@
-import requests
 import os
+
+import requests
 
 GIBIBYTE = 1073741824
 
