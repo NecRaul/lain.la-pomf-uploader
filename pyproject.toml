@@ -60,3 +60,9 @@ exclude = '''
   | .*\.egg-info
 )
 '''
+
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+skip = [".git", ".venv", "__pycache", "build", "dist"]
+skip_glob = ["*.egg-info"]
