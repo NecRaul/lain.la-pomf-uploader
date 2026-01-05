@@ -18,7 +18,11 @@ pip install lain-upload[clipboard]
 
 ```sh
 git clone git@github.com:NecRaul/lain.la-pomf-uploader.git
-cd lain-la-pomf-uploader
+cd lain.la-pomf-uploader
+# You can skip the next two commands
+# for installing it globally
+python -m venv .venv
+source .venv/bin/activate
 pip install -e .[clipboard,dev,build]
 ```
 
@@ -27,7 +31,7 @@ pip install -e .[clipboard,dev,build]
 Simply provide the path to the file you wish to upload.
 
 ```sh
-# Standard usage
+# Upload a file
 lain-upload kuroneko.png
 
 # Upload a file from a different directory
@@ -40,21 +44,23 @@ lain-upload /path/to/kuroneko.png
 
 ### Optional
 
-* [pyperclip](https://github.com/asweigart/pyperclip) - copy the uploaded file URL to the clipboard. (optional)
+* [pyperclip](https://github.com/asweigart/pyperclip): copy the uploaded file URL to the clipboard.
 
 ## How it works
 
-The `pomf.lain.la` service allows uploading files via a multipart `POST` request. This tool automates the process and adds safety checks:
+The `pomf.lain.la` service allows uploading files via a multipart `POST` request.
+
+This tool automates the process and adds safety checks.
 
 ### The Manual Way
 
 ```sh
-curl -F "files[]=@my_image.png" https://pomf.lain.la/upload.php
+curl -F "files[]=@kuroneko.png" https://pomf.lain.la/upload.php
 ```
 
 ### The lain-upload way
 
 * Validation: Checks the file size before uploading to ensure it is below the `1GiB` limit.
+* API Request: Sends the multipart `POST` request via `requests`.
 * Normalization: Parses the server response to provide clean links from `pomf.lain.la` or `pomf2.lain.la`.
-* API Request: Handles the multipart `POST` request via `requests`.
 * Clipboard (Optional): If `pyperclip` is installed, the result is instantly copied to your clipboard.
