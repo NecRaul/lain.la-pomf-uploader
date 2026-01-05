@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-VERSION = "1.14"
+VERSION = "1.15"
 DESCRIPTION = "pomf.lain.la uploader."
 with open("README.md", "r") as file:
     LONG_DESCRIPTION = file.read()
