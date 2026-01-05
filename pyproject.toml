@@ -31,8 +31,9 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-default = ["pyperclip"]
-dev = ["flake8", "isort", "black", "pre-commit", "pyperclip"]
+clipboard = ["pyperclip"]
+dev = ["flake8", "isort", "black", "pre-commit"]
+build = ["build", "twine"]
 
 [project.urls]
 Homepage = "https://github.com/NecRaul/lain.la-pomf-uploader"

@@ -11,7 +11,7 @@
 pip install lain-upload
 
 # With clipboard support (recommended for desktop)
-pip install lain-upload[default]
+pip install lain-upload[clipboard]
 ```
 
 ### From Source (Development)
@@ -19,7 +19,7 @@ pip install lain-upload[default]
 ```sh
 git clone git@github.com:NecRaul/lain.la-pomf-uploader.git
 cd lain-la-pomf-uploader
-pip install -e .[dev]
+pip install -e .[clipboard,dev,build]
 ```
 
 ## Usage
