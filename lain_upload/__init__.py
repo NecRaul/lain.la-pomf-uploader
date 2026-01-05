@@ -2,13 +2,6 @@ import argparse
 
 from .upload import upload_file
 
-try:
-    import pyperclip
-
-    CLIP_OK = pyperclip.is_available()
-except Exception:
-    CLIP_OK = False
-
 
 def main():
     parser = argparse.ArgumentParser(description="Upload file to pomf.lain.la")
@@ -20,9 +13,14 @@ def main():
     if response:
         url = response["files"][0]["url"]
         print(f"File URL: {url}")
-        if CLIP_OK:
+
+        try:
+            import pyperclip
+
             pyperclip.copy(url)
             print("Copied to clipboard.")
+        except Exception:
+            pass
     else:
         print("Upload failed.")
 
