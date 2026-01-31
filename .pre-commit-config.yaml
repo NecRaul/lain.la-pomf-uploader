@@ -3,20 +3,30 @@ repos:
     rev: v6.0.0
     hooks:
       - id: check-yaml
+      - id: check-toml
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
-  - repo: https://github.com/pycqa/flake8
-    rev: 7.3.0
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.9.28
     hooks:
-      - id: flake8
+      - id: uv-lock
+        args:
+          - --check
 
-  - repo: https://github.com/pycqa/isort
-    rev: 7.0.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.14
     hooks:
-      - id: isort
+      - id: ruff-check
+        args:
+          - --fix
+      - id: ruff-format
 
-  - repo: https://github.com/psf/black
-    rev: 25.12.0
+  - repo: local
     hooks:
-      - id: black
+      - id: ty-check
+        name: ty check
+        entry: uv run ty check
+        language: system
+        types_or:
+          - python

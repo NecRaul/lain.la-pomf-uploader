@@ -1,9 +1,9 @@
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build>=0.9.28"]
+build-backend = "uv_build"
 
 [project]
-name = "lain_upload"
+name = "lain-upload"
 version = "1.15"
 description = "pomf.lain.la uploader."
 readme = "README.md"
@@ -19,21 +19,25 @@ keywords = [
   "pomf.lain.la",
   "kuroneko",
 ]
-dependencies = ["requests", "requests-toolbelt"]
+requires-python = ">=3.10"
+dependencies = ["requests>=2.32.5", "requests-toolbelt>=1.0.0"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Environment :: Console",
   "Intended Audience :: Developers",
   "Natural Language :: English",
   "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Internet :: WWW/HTTP",
 ]
 
 [project.optional-dependencies]
-clipboard = ["pyperclip"]
-dev = ["flake8", "isort", "black", "pre-commit"]
-build = ["build", "twine"]
+clipboard = ["pyperclip>=1.11.0"]
 
 [project.urls]
 Homepage = "https://github.com/NecRaul/lain.la-pomf-uploader"
@@ -44,27 +48,39 @@ Issues = "https://github.com/NecRaul/lain.la-pomf-uploader/issues"
 [project.scripts]
 lain-upload = "lain_upload.cli:main"
 
-[tool.setuptools]
-py-modules = ["upload"]
+[dependency-groups]
+dev = [
+  "pyperclip>=1.11.0",
+  "ruff>=0.14.14",
+  "ty>=0.0.14",
+  "pre-commit>=4.5.1",
+  "debugpy>=1.8.20",
+]
 
-[tool.setuptools.packages.find]
-where = ["."]
+[tool.uv]
+default-groups = ["dev"]
+python-preference = "only-managed"
+trusted-publishing = "always"
 
-[tool.black]
+[tool.uv.build-backend]
+module-name = "lain_upload"
+module-root = "src"
+
+[tool.ruff]
 line-length = 88
-exclude = '''
-(
-    \.git
-  | \.venv
-  | __pycache__
-  | build
-  | dist
-  | .*\.egg-info
-)
-'''
+indent-width = 4
+target-version = "py310"
+include = ["pyproject.toml", "src/**/*.py"]
 
-[tool.isort]
-profile = "black"
-skip_gitignore = true
-skip = [".git", ".venv", "__pycache", "build", "dist"]
-skip_glob = ["*.egg-info"]
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+fixable = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+skip-magic-trailing-comma = false
+
+[tool.ty.src]
+include = ["src/lain_upload"]
