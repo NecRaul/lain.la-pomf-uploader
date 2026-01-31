@@ -11,23 +11,23 @@ authors = [{ name = "NecRaul", email = "necraul@kuroneko.dev" }]
 license = "LGPL-2.1-only"
 license-files = ["LICENSE"]
 keywords = [
-    "python",
-    "uploader",
-    "pomf",
-    "lain",
-    "lain.la",
-    "pomf.lain.la",
-    "kuroneko",
+  "python",
+  "uploader",
+  "pomf",
+  "lain",
+  "lain.la",
+  "pomf.lain.la",
+  "kuroneko",
 ]
-dependencies = ["requests"]
+dependencies = ["requests", "requests-toolbelt"]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Environment :: Console",
-    "Intended Audience :: Developers",
-    "Natural Language :: English",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Topic :: Internet :: WWW/HTTP",
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Topic :: Internet :: WWW/HTTP",
 ]
 
 [project.optional-dependencies]
@@ -42,7 +42,7 @@ Repository = "https://github.com/NecRaul/lain.la-pomf-uploader"
 Issues = "https://github.com/NecRaul/lain.la-pomf-uploader/issues"
 
 [project.scripts]
-lain-upload = "lain_upload:main"
+lain-upload = "lain_upload.cli:main"
 
 [tool.setuptools]
 py-modules = ["upload"]

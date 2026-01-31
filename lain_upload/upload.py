@@ -1,26 +1,36 @@
-import os
+from pathlib import Path
 
 import requests
+from requests_toolbelt import MultipartEncoderMonitor
+from requests_toolbelt.multipart.encoder import MultipartEncoder
 
-GIBIBYTE = 1073741824
+GIBIBYTE = 1024 * 1024 * 1024
 
 API_ENDPOINT = "https://pomf.lain.la/upload.php"
 
 
-def upload_file(file_path):
-    with open(file_path, "rb") as file:
-        try:
-            file_size = os.path.getsize(file_path)
-            if file_size >= GIBIBYTE:
-                return None
-            else:
-                files = {"files[]": (file_path, file)}
-
-                response = requests.post(API_ENDPOINT, files=files)
-
-                if response.status_code == 200:
-                    return response.json()
-                else:
-                    return None
-        except Exception:
-            return None
+def upload_file(file_path_str, progress_callback=None):
+    file_path = Path(file_path_str)
+    print(f"Uploading {file_path.name}")
+    if not file_path.is_file():
+        raise FileNotFoundError(file_path)
+    file_size = file_path.stat().st_size
+    if file_size > GIBIBYTE:
+        raise ValueError(f"{file_path.name} bigger than 1GiB")
+    with file_path.open("rb") as file:
+        encoder = MultipartEncoder(fields={"files[]": (file_path.name, file)})
+        data = (
+            MultipartEncoderMonitor(
+                encoder, lambda m: progress_callback(m.bytes_read, encoder.len)
+            )
+            if progress_callback
+            else encoder
+        )
+        response = requests.post(
+            url=API_ENDPOINT,
+            data=data,
+            headers={"Content-Type": data.content_type},
+            timeout=30,
+        )
+        response.raise_for_status()
+        return response.json()
