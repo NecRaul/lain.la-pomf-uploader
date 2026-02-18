@@ -14,6 +14,7 @@ def main():
         "litterbox": {"class": "Litterbox", "options": {}},
         "pomf": {"class": "Pomf", "options": {}},
         "uguu": {"class": "Uguu", "options": {}},
+        "fileditch": {"class": "FileDitch", "options": {}},
     }
     deprecated_hosts = {
         "pomf": "pomf is no longer supported.\nSee: https://infrablog.lain.la/pomf-announcement",
