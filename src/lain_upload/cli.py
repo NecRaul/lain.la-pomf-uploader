@@ -13,7 +13,7 @@ def main():
         "catbox": {"class": "Catbox", "options": {}},
         "litterbox": {"class": "Litterbox", "options": {}},
         "pomf": {"class": "Pomf", "options": {}},
-        "uguu": {"class": None, "options": {}},
+        "uguu": {"class": "Uguu", "options": {}},
     }
     deprecated_hosts = {
         "pomf": "pomf is no longer supported.\nSee: https://infrablog.lain.la/pomf-announcement",
