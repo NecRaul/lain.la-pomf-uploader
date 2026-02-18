@@ -1,3 +1,4 @@
-from .upload import upload_file
+from . import uploader
+from .version import __version__
 
-__all__ = ["upload_file"]
+__all__ = ["uploader", "__version__"]
