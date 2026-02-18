@@ -8,8 +8,7 @@ class FileDitchUploader(BaseUploader):
         self.file_max_size_str = "15GB"
         self.api_endpoint = "https://up1.fileditch.com/upload.php"
 
-    @staticmethod
-    def _build_fields(file_name, file):
+    def _build_fields(self, file_name, file):
         return {"files[]": (file_name, file)}
 
     @staticmethod

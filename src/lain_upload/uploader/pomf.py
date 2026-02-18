@@ -8,8 +8,7 @@ class PomfUploader(BaseUploader):
         self.file_max_size_str = "1GiB"
         self.api_endpoint = "https://pomf.lain.la/upload.php"
 
-    @staticmethod
-    def _build_fields(file_name, file):
+    def _build_fields(self, file_name, file):
         return {"files[]": (file_name, file)}
 
     @staticmethod

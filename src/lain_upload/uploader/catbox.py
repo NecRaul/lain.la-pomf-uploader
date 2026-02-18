@@ -8,8 +8,7 @@ class CatboxUploader(BaseUploader):
         self.file_max_size_str = "200MB"
         self.api_endpoint = "https://catbox.moe/user/api.php"
 
-    @staticmethod
-    def _build_fields(file_name, file):
+    def _build_fields(self, file_name, file):
         return {
             "reqtype": "fileupload",
             "userhash": "",  # placeholder

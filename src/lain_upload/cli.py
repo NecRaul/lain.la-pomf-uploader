@@ -22,7 +22,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="Upload file to pomf.lain.la",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-        epilog="Example: %(prog)s -p file1.txt file2.jpg file3.webm",
+        epilog="Example: %(prog)s --host catbox file1.txt file2.jpg file3.webm",
     )
     parser.add_argument("-v", "--version", action="version", version=__version__)
     parser.add_argument(

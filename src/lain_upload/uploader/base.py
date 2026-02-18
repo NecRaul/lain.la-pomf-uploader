@@ -23,23 +23,12 @@ class BaseUploader:
             response = self._upload_impl(data, headers)
         return self._extract_url(response)
 
-    @staticmethod
-    def _build_fields(file_name, file):
+    def _build_fields(self, file_name, file):
         raise NotImplementedError
 
     @staticmethod
     def _extract_url(response):
         raise NotImplementedError
-
-    def _upload_impl(self, data, headers):
-        response = requests.post(
-            url=self.api_endpoint,
-            data=data,
-            headers=headers,
-            timeout=30,
-        )
-        response.raise_for_status()
-        return response
 
     def _get_file_path(self):
         file_path = self.file_path
@@ -56,6 +45,16 @@ class BaseUploader:
         return MultipartEncoderMonitor(
             encoder, lambda m: self._progress_callback(m.bytes_read, total_bytes)
         )
+
+    def _upload_impl(self, data, headers):
+        response = requests.post(
+            url=self.api_endpoint,
+            data=data,
+            headers=headers,
+            timeout=30,
+        )
+        response.raise_for_status()
+        return response
 
     def _progress_callback(self, bytes_sent, total_bytes):
         if total_bytes <= 0 or self._done_printed:

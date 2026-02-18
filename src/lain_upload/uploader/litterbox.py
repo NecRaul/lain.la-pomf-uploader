@@ -8,8 +8,7 @@ class LitterboxUploader(BaseUploader):
         self.file_max_size_str = "1GB"
         self.api_endpoint = "https://litterbox.catbox.moe/resources/internals/api.php"
 
-    @staticmethod
-    def _build_fields(file_name, file):
+    def _build_fields(self, file_name, file):
         return {
             "reqtype": "fileupload",
             "time": "12h",  # placeholder

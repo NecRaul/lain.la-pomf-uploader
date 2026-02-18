@@ -8,8 +8,7 @@ class UguuUploader(BaseUploader):
         self.file_max_size_str = "128MiB"
         self.api_endpoint = "https://uguu.se/upload?output=text"
 
-    @staticmethod
-    def _build_fields(file_name, file):
+    def _build_fields(self, file_name, file):
         return {"files[]": (file_name, file)}
 
     @staticmethod
