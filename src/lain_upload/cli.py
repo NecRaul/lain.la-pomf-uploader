@@ -11,7 +11,7 @@ from .version import __version__
 def main():
     allowed_hosts = {
         "catbox": {"class": "Catbox", "options": {}},
-        "litterbox": {"class": None, "options": {}},
+        "litterbox": {"class": "Litterbox", "options": {}},
         "pomf": {"class": "Pomf", "options": {}},
         "uguu": {"class": None, "options": {}},
     }
