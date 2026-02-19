@@ -4,7 +4,7 @@ from pathlib import Path
 
 import requests
 
-from . import uploader
+from . import uploader, util
 from .version import __version__
 
 
@@ -35,6 +35,13 @@ def main():
         help="host to use for uploading",
     )
     parser.add_argument("--auth", nargs="?", help="authentication information")
+    parser.add_argument(
+        "--expire-after",
+        nargs="?",
+        type=util.expire_after_type,
+        help="file expiration in hours (e.g. 1h, 12h, 24h, 72h). "
+        "Unsupported values round down to nearest supported",
+    )
     parser.add_argument("file_paths", nargs="+", help="File path(s)")
 
     args = parser.parse_args()
@@ -64,7 +71,10 @@ def main():
         if option in host_options:
             kwargs[option] = value
         else:
-            print(f"Warning: {args.host} does not support {option}, ignoring it")
+            print(
+                f"Warning: {args.host} does not support {option}, ignoring it",
+                file=sys.stderr,
+            )
 
     uploaded_urls = []
     has_error = False
