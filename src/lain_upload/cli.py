@@ -43,6 +43,13 @@ def main():
         help="file expiration in hours (e.g. 1h, 12h, 24h, 72h). "
         "Unsupported values round down to nearest supported",
     )
+    parser.add_argument(
+        "--long-filenames",
+        nargs="?",
+        const=True,
+        default=None,
+        help="use longer filenames for uploaded files",
+    )
     parser.add_argument("file_paths", nargs="+", help="File path(s)")
 
     args = parser.parse_args()
