@@ -20,6 +20,7 @@ class BaseUploader:
             fields = self._build_fields(file_path.name, file)
             data = self._build_monitor(fields)
             headers = {"Content-Type": data.content_type}
+            headers.update(self._build_headers())
             response = self._upload_impl(data, headers)
         return self._extract_url(response)
 
@@ -45,6 +46,9 @@ class BaseUploader:
         return MultipartEncoderMonitor(
             encoder, lambda m: self._progress_callback(m.bytes_read, total_bytes)
         )
+
+    def _build_headers(self):
+        return {}
 
     def _upload_impl(self, data, headers):
         response = requests.post(
