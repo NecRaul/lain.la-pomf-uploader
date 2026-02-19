@@ -15,6 +15,7 @@ def main():
         "pomf": {"class": "Pomf", "options": {}},
         "uguu": {"class": "Uguu", "options": {}},
         "fileditch": {"class": "FileDitch", "options": {}},
+        "gofile": {"class": "Gofile", "options": {}},
     }
     deprecated_hosts = {
         "pomf": "pomf is no longer supported.\nSee: https://infrablog.lain.la/pomf-announcement",
