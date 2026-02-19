@@ -11,9 +11,7 @@ class NullUploader(BaseUploader):
         self.api_endpoint = "https://0x0.st"
 
     def _build_fields(self, file_name, file):
-        data = {
-            "file": (file_name, file)
-        }
+        data = {"file": (file_name, file)}
         if self.expire_after:
             data["expires"] = self._normalize_expire_after(self.expire_after)
         if self.long_filenames:
