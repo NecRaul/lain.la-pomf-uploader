@@ -15,6 +15,7 @@ def main():
         "pomf": {"class": "Pomf", "options": {}},
         "uguu": {"class": "Uguu", "options": {}},
         "fileditch": {"class": "FileDitch", "options": {}},
+        "0x0": {"class": "Null", "options": {}},
         "gofile": {"class": "Gofile", "options": {"auth"}},
         "pixeldrain": {"class": "Pixeldrain", "options": {"auth"}},
     }
