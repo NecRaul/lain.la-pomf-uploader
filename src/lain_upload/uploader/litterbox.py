@@ -4,9 +4,10 @@ from .base import BaseUploader
 
 
 class LitterboxUploader(BaseUploader):
-    def __init__(self, file_path, expire_after="12h"):
+    def __init__(self, file_path, expire_after="12h", long_filenames=False):
         self.file_path = file_path
         self.expire_after = expire_after
+        self.long_filenames = long_filenames
         self.file_max_size = 1000 * 1000 * 1000
         self.file_max_size_str = "1GB"
         self.api_endpoint = "https://litterbox.catbox.moe/resources/internals/api.php"
@@ -15,6 +16,7 @@ class LitterboxUploader(BaseUploader):
         return {
             "reqtype": "fileupload",
             "time": self._normalize_expire_after(self.expire_after),
+            "fileNameLength": "16" if self.long_filenames else "6",
             "fileToUpload": (file_name, file),
         }
 
