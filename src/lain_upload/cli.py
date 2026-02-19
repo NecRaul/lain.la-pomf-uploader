@@ -15,7 +15,7 @@ def main():
         "pomf": {"class": "Pomf", "options": {}},
         "uguu": {"class": "Uguu", "options": {}},
         "fileditch": {"class": "FileDitch", "options": {}},
-        "gofile": {"class": "Gofile", "options": {}},
+        "gofile": {"class": "Gofile", "options": {"auth"}},
         "pixeldrain": {"class": "Pixeldrain", "options": {"auth"}},
     }
     deprecated_hosts = {
