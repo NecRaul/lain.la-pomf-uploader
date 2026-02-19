@@ -54,7 +54,7 @@ def main():
         parser.error(f"Uploader class for host {args.host} is invalid.")
 
     host_options = host_info["options"]
-    all_options = [opt for host in allowed_hosts.values() for opt in host["options"]]
+    all_options = {opt for host in allowed_hosts.values() for opt in host["options"]}
     kwargs = {}
 
     for option in all_options:
