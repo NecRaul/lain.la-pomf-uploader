@@ -16,7 +16,7 @@ def main():
         "uguu": {"class": "Uguu", "options": {}},
         "fileditch": {"class": "FileDitch", "options": {}},
         "gofile": {"class": "Gofile", "options": {}},
-        "pixeldrain": {"class": "Pixeldrain", "options": {}},
+        "pixeldrain": {"class": "Pixeldrain", "options": {"auth"}},
     }
     deprecated_hosts = {
         "pomf": "pomf is no longer supported.\nSee: https://infrablog.lain.la/pomf-announcement",
@@ -34,6 +34,7 @@ def main():
         choices=allowed_hosts.keys(),
         help="host to use for uploading",
     )
+    parser.add_argument("--auth", nargs="?", help="authentication information")
     parser.add_argument("file_paths", nargs="+", help="File path(s)")
 
     args = parser.parse_args()
@@ -52,13 +53,26 @@ def main():
     else:
         parser.error(f"Uploader class for host {args.host} is invalid.")
 
+    host_options = host_info["options"]
+    all_options = [opt for host in allowed_hosts.values() for opt in host["options"]]
+    kwargs = {}
+
+    for option in all_options:
+        value = getattr(args, option, None)
+        if value is None:
+            continue
+        if option in host_options:
+            kwargs[option] = value
+        else:
+            print(f"Warning: {args.host} does not support {option}, ignoring it")
+
     uploaded_urls = []
     has_error = False
 
     for file_path_str in args.file_paths:
         try:
             file_path = Path(file_path_str)
-            uploader_instance = host_class(file_path)
+            uploader_instance = host_class(file_path, **kwargs)
             url = uploader_instance.upload()
             print(f"{file_path.name}: {url}")
             uploaded_urls.append(url)
