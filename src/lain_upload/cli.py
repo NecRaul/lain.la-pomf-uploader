@@ -83,7 +83,7 @@ def main():
             kwargs[option] = value
         else:
             print(
-                f"Warning: {args.host} does not support {option}, ignoring it",
+                f"Warning: {args.host} does not support {option} option, ignoring it",
                 file=sys.stderr,
             )
 
