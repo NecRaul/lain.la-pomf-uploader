@@ -73,7 +73,7 @@ def main():
         try:
             file_path = Path(file_path_str)
             uploader_instance = host_class(file_path, **kwargs)
-            url = uploader_instance.upload()
+            url = uploader_instance.upload().strip()
             print(f"{file_path.name}: {url}")
             uploaded_urls.append(url)
         except FileNotFoundError as e:
