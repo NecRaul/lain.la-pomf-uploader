@@ -10,7 +10,7 @@ from .version import __version__
 
 def main():
     allowed_hosts = {
-        "catbox": {"class": "Catbox", "options": {}},
+        "catbox": {"class": "Catbox", "options": {"auth"}},
         "litterbox": {"class": "Litterbox", "options": {}},
         "pomf": {"class": "Pomf", "options": {}},
         "uguu": {"class": "Uguu", "options": {}},

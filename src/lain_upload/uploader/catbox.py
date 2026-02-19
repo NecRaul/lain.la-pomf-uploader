@@ -2,8 +2,9 @@ from .base import BaseUploader
 
 
 class CatboxUploader(BaseUploader):
-    def __init__(self, file_path):
+    def __init__(self, file_path, auth=""):
         self.file_path = file_path
+        self.auth = auth
         self.file_max_size = 200 * 1000 * 1000
         self.file_max_size_str = "200MB"
         self.api_endpoint = "https://catbox.moe/user/api.php"
@@ -11,7 +12,7 @@ class CatboxUploader(BaseUploader):
     def _build_fields(self, file_name, file):
         return {
             "reqtype": "fileupload",
-            "userhash": "",  # placeholder
+            "userhash": self.auth,
             "fileToUpload": (file_name, file),
         }
 
