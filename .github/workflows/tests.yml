@@ -1,20 +1,19 @@
-name: Check linting and formatting
+name: Run tests
 
 on:
-  workflow_run:
-    workflows: ["Run tests"]
-    types:
-      - completed
+  push:
     branches:
       - main
       - release
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
 
 jobs:
-  lint-and-format:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  tests:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -41,14 +40,7 @@ jobs:
       - name: Install dependencies
         run: uv sync --dev
 
-      - name: Uv sync check
-        run: uv sync --check
-
-      - name: Ruff lint & import check
-        run: uv run ruff check
-
-      - name: Ruff format check
-        run: uv run ruff format --check --diff
-
-      - name: Ty type check
-        run: uv run ty check
+      - name: Run tests
+        run: uv run pytest tests
+        env:
+          PIXELDRAIN_API_KEY: ${{ secrets.PIXELDRAIN_API_KEY }}

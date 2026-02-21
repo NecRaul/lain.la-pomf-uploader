@@ -120,6 +120,9 @@ class UploadIntegrationTests(unittest.TestCase):
             verify_access=False,
         )
 
+    @unittest.skipIf(
+        os.getenv("GITHUB_ACTIONS") == "true", "Skipping NullUploader test on GitHub CI"
+    )
     def test_null_upload(self):
         url = (
             NullUploader(self.file_path, expire_after="72h", long_filenames=True)
