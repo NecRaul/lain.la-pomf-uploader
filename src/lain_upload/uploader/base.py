@@ -19,7 +19,10 @@ class BaseUploader:
         with file_path.open("rb") as file:
             fields = self._build_fields(file_path.name, file)
             data = self._build_monitor(fields)
-            headers = {"Content-Type": data.content_type}
+            headers = {
+                "Content-Type": data.content_type,
+                "User-Agent": "lain-upload/1.16 (https://github.com/NecRaul/lain-upload)",
+            }
             headers.update(self._build_headers())
             response = self._upload_impl(data, headers)
         return self._extract_url(response)
