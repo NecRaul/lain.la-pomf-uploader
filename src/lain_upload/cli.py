@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -86,6 +87,14 @@ def main():
                 f"Warning: {args.host} does not support {option} option, ignoring it",
                 file=sys.stderr,
             )
+
+    if "auth" in host_options and "auth" not in kwargs:
+        auth_env_var = f"{host_info['class'].upper()}_API_KEY"
+        auth_from_env = os.getenv(auth_env_var)
+        print(auth_env_var)
+        print(auth_from_env)
+        if auth_from_env:
+            kwargs["auth"] = auth_from_env
 
     uploaded_urls = []
     has_error = False
