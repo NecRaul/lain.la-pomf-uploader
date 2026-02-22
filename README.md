@@ -1,6 +1,6 @@
-# lain.la-pomf-uploader
+# lain-upload
 
-`pomf.lain.la` uploader.
+A simple CLI file uploader for multiple file-hosting services, with optional clipboard copy.
 
 ## Installation
 
@@ -42,8 +42,8 @@ uv run --with "lain-upload[clipboard]" lain-upload <file1> <file2> <file3>
 
 ```sh
 # Clone the repository and navigate to it
-git clone git@github.com:NecRaul/lain.la-pomf-uploader.git
-cd lain.la-pomf-uploader
+git clone git@github.com:NecRaul/lain-upload.git
+cd lain-upload
 
 # Install environment and all development dependencies (mandatory and optional)
 uv sync --dev
@@ -56,6 +56,9 @@ uv run pre-commit run --all-files
 
 # Run the local version
 uv run lain-upload <file1> <file2> <file3>
+
+# Run tests
+uv run pytest tests
 ```
 
 ## Usage
@@ -63,47 +66,70 @@ uv run lain-upload <file1> <file2> <file3>
 Simply provide the path to the file or files you wish to upload.
 
 ```sh
-# Upload a file
+# Upload a single file (default host: catbox)
 lain-upload kuroneko.png
 
-# Upload files from different directories
-lain-upload /path/to/kuroneko.png /path/to/another/directory/shirone.png yamineko.png ../kamineko.png
+# Upload multiple files from different directories
+lain-upload /path/to/kuroneko.png /path/to/another/directory/shironeko.png yamineko.png ../kamineko.png
 
-# Upload files with the -p/--progress flag
-lain-upload -p big-file
+# Select a specific host
+lain-upload --host uguu kuroneko.png
 
-# Display help with the -h/--help flag
+# Use host authentication when supported
+lain-upload --host pixeldrain --auth "$PIXELDRAIN_API_KEY" kuroneko.png
+
+# Set temporary file expiration when supported (e.g. 1h, 12h, 24h, 72h, etc.)
+lain-upload --host litterbox --expire-after 24h kuroneko.png
+
+# Enable longer generated filenames when supported
+lain-upload --host 0x0 --long-filenames -- kuroneko.png shironeko.png
+
+# Display help and version
 lain-upload -h
-
-# Display version with the -v/--version flag
 lain-upload -v
 ```
 
+## Supported Hosts
+
+- [catbox](https://catbox.moe/) - Support for user authentication with userhashes
+- [litterbox](https://litterbox.catbox.moe/) - Support for custom expiration time and longer upload filenames
+- [pomf](https://pomf.lain.la/) - No extra options (_deprecated_)
+- [uguu](https://uguu.se/) - No extra options
+- [fileditch](https://fileditch.com/) - No extra options
+- [0x0](https://0x0.st/) - Support for custom expiration time and longer upload filenames
+- [gofile](https://gofile.io/) - Support for user authentication with bearer API tokens
+- [pixeldrain](https://pixeldrain.com/) - Support for user authentication with API keys (**Required**)
+
 ## Dependencies
 
-* [requests](https://github.com/psf/requests): send the API request for uploading.
-* [requests-toolbelt](https://github.com/requests/toolbelt): enable memory-efficient streaming and progress tracking for large uploads.
+- [requests](https://github.com/psf/requests): send the API request for uploading.
+- [requests-toolbelt](https://github.com/requests/toolbelt): enable memory-efficient streaming and progress tracking for large uploads.
 
 ### Optional
 
-* [pyperclip](https://github.com/asweigart/pyperclip): copy the uploaded files' URLs to the clipboard.
+- [pyperclip](https://github.com/asweigart/pyperclip): copy the uploaded files' URLs to the clipboard.
 
 ## How it works
 
-The `pomf.lain.la` service allows uploading files via a multipart `POST` request.
+Supported services expose upload endpoints via multipart `POST` requests.
 
-This tool automates the process and adds safety checks.
+This tool automates uploads and adds safety checks and quality-of-life features.
 
 ### The Manual Way
 
 ```sh
-curl -F "files[]=@kuroneko.png" https://pomf.lain.la/upload.php
+curl -F "file=@kuroneko.png" https://example-upload-service.tld/upload-endpoint
 ```
 
 ### The lain-upload way
 
-* Batch Processing: Upload multiple files in a single command execution, saving time over individual manual requests.
-* Validation: Checks the file size before uploading to ensure it is below the `1GiB` limit.
-* API Request: Sends the multipart `POST` request via `requests` and `requests-toolbelt`, provides progress bar with the `-p/--progress` flag.
-* Normalization: Parses the server response to provide clean links from `pomf.lain.la` or `pomf2.lain.la`.
-* Clipboard (Optional): If `pyperclip` is installed, the result is instantly copied to your clipboard.
+- Batch Processing: Upload multiple files in a single command execution, saving time over individual manual requests.
+- Validation: Checks file constraints before uploading (service-specific rules are enforced per host).
+- API Request: Sends multipart `POST` requests via `requests` and `requests-toolbelt`, with streaming support for large files.
+- Normalization: Parses server responses into clean, shareable URLs.
+- Clipboard (Optional): If `pyperclip` is installed, the result is instantly copied to your clipboard.
+
+## Special thanks
+
+- To **7666** of <https://lain.la/> for running the [pomf](https://pomf.lain.la/) service that inspired this project.
+- To **r/a/dio anons** for feedback and suggestions.
