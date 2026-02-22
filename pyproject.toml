@@ -5,18 +5,26 @@ build-backend = "uv_build"
 [project]
 name = "lain-upload"
 version = "1.16"
-description = "pomf.lain.la uploader."
+description = "A simple CLI file uploader for multiple file-hosting services, with optional clipboard copy."
 readme = "README.md"
 authors = [{ name = "NecRaul", email = "necraul@kuroneko.dev" }]
 license = "LGPL-2.1-only"
 license-files = ["LICENSE"]
 keywords = [
   "python",
+  "file-upload",
+  "file-uploader",
   "uploader",
+  "catbox",
+  "litterbox",
   "pomf",
+  "uguu",
+  "fileditch",
+  "0x0",
+  "gofile",
+  "pixeldrain",
+  "lain-upload",
   "lain",
-  "lain.la",
-  "pomf.lain.la",
   "kuroneko",
 ]
 requires-python = ">=3.10"
@@ -40,10 +48,10 @@ classifiers = [
 clipboard = ["pyperclip>=1.11.0"]
 
 [project.urls]
-Homepage = "https://github.com/NecRaul/lain.la-pomf-uploader"
-Documentation = "https://github.com/NecRaul/lain.la-pomf-uploader#readme"
-Repository = "https://github.com/NecRaul/lain.la-pomf-uploader"
-Issues = "https://github.com/NecRaul/lain.la-pomf-uploader/issues"
+Homepage = "https://github.com/NecRaul/lain-upload"
+Documentation = "https://github.com/NecRaul/lain-upload#readme"
+Repository = "https://github.com/NecRaul/lain-upload"
+Issues = "https://github.com/NecRaul/lain-upload/issues"
 
 [project.scripts]
 lain-upload = "lain_upload.cli:main"
